@@ -34,7 +34,7 @@ class Deck {
             }
         }
     }
-
+// added shuffle mechanism to the code, so that each round will be random (like war)
     shuffle() {
         const deck = this.deck;
         for (let i = this.deck.length - 1; i > 0; i--) {
@@ -43,6 +43,7 @@ class Deck {
         }
     }
 
+// added deal mechanism, telling java to push a new card to player 1 and player 2's cards
     deal(player1, player2) {
         while (this.deck.length > 0) {
             player1.cards.push(this.deck.pop());
@@ -50,6 +51,10 @@ class Deck {
         }
     }
 
+// this function is the "playgame" function that initializes the functions deal and shuffle, and mimic a round of war where both
+// players place a card, compare, and then calculate points based on the values
+// then, the game will see if the players have any cards, if so, the game restarts
+// if not, the game will end and java will announce the winner
     playGame() {
         const player1 = new Player("Player 1", []);
         const player2 = new Player("Player 2", []);
@@ -70,13 +75,13 @@ class Deck {
             }
         }
         
-        while (player1.hasCards() && player2.hasCards()) {
+        while (player1.hasCards() && player2.hasCards()) { 
             const card1 = player1.cards.pop();
             const card2 = player2.cards.pop();
 
             const roundPoints = calculatePoints(card1, card2);
 
-            if (roundPoints === 1) {
+            if (roundPoints === 1) { // changed it to numbers so can call upon in if/else. 
                 player1Points++;
             } else if (roundPoints === 2) {
                 player2Points++;
@@ -95,6 +100,10 @@ class Deck {
         }
     }
 }
+
+// Create a new deck and play the game
+const deck = new Deck();
+deck.playGame();
 
 // Create a new deck and play the game
 const deck = new Deck();
